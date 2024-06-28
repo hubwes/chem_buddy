@@ -1,0 +1,28 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "chem-buddy-10bfa",
+          "appId": "1:750145129208:android:eab56eb1af0c784149090d",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "chem-buddy-10bfa",
+          "configurations": {
+            "android": "1:750145129208:android:eab56eb1af0c784149090d",
+            "ios": "1:750145129208:ios:f236c301a82de73d49090d",
+            "macos": "1:750145129208:ios:f236c301a82de73d49090d",
+            "web": "1:750145129208:web:00e022574ef67c4e49090d",
+            "windows": "1:750145129208:web:605953e895ed870849090d"
+          }
+        }
+      }
+    }
+  },
+  "database": {
+    "rules": "database.rules.json"
+  }
+}

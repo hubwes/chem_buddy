@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "750145129208",
+    "firebase_url": "https://chem-buddy-10bfa-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "chem-buddy-10bfa",
+    "storage_bucket": "chem-buddy-10bfa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750145129208:android:eab56eb1af0c784149090d",
+        "android_client_info": {
+          "package_name": "com.chem.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDXJiUertHOu318n32b-wYS6Wf_KOIJK4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750145129208:android:7d417b8546d8efcf49090d",
+        "android_client_info": {
+          "package_name": "com.chem_buddy.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDXJiUertHOu318n32b-wYS6Wf_KOIJK4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750145129208:android:66fa5c27c23861c449090d",
+        "android_client_info": {
+          "package_name": "com.example.chem_buddy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDXJiUertHOu318n32b-wYS6Wf_KOIJK4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
