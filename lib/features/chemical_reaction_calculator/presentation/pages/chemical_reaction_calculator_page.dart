@@ -8,8 +8,6 @@ class ChemicalReactionCalculatorPage extends StatefulWidget {
 
 class _ChemicalReactionCalculatorPageState extends State<ChemicalReactionCalculatorPage> {
   final TextEditingController _equationController = TextEditingController();
-  final TextEditingController _molesController = TextEditingController();
-  final TextEditingController _yieldController = TextEditingController();
   String? _result;
   String? _error;
 
@@ -35,32 +33,6 @@ class _ChemicalReactionCalculatorPageState extends State<ChemicalReactionCalcula
                 hintText: 'e.g., H2 + O2 -> H2O',
                 border: OutlineInputBorder(),
               ),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Moles of a Reactant or Product (optional)',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            TextField(
-              controller: _molesController,
-              decoration: InputDecoration(
-                hintText: 'Enter moles',
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: TextInputType.number,
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Yield Percentage (optional)',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            TextField(
-              controller: _yieldController,
-              decoration: InputDecoration(
-                hintText: 'Enter yield percentage',
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: TextInputType.number,
             ),
             SizedBox(height: 20),
             SizedBox(
@@ -109,8 +81,6 @@ class _ChemicalReactionCalculatorPageState extends State<ChemicalReactionCalcula
     });
 
     final equation = _equationController.text;
-    final moles = double.tryParse(_molesController.text);
-    final yieldPercentage = double.tryParse(_yieldController.text);
 
     if (equation.isEmpty) {
       setState(() {
@@ -124,8 +94,6 @@ class _ChemicalReactionCalculatorPageState extends State<ChemicalReactionCalcula
       final balancedEquation = calculator.balanceEquation(equation);
       final result = calculator.calculateMoles(
         balancedEquation,
-        moles: moles,
-        yieldPercentage: yieldPercentage,
       );
 
       setState(() {

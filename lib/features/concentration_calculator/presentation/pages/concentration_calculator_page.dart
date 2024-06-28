@@ -50,7 +50,7 @@ class _ConcentrationCalculatorPageState extends ConsumerState<ConcentrationCalcu
               }).toList(),
               isExpanded: true,
               style: TextStyle(fontSize: 18, color: Theme.of(context).textTheme.bodyMedium?.color),
-              dropdownColor: Theme.of(context).colorScheme.background,
+              dropdownColor: Theme.of(context).colorScheme.surface,
             ),
             if (_concentrationType != null) ..._buildInputFields(context),
             SizedBox(height: 20),
@@ -121,7 +121,7 @@ class _ConcentrationCalculatorPageState extends ConsumerState<ConcentrationCalcu
         }).toList(),
         isExpanded: true,
         style: TextStyle(fontSize: 18, color: Theme.of(context).textTheme.bodyMedium?.color),
-        dropdownColor: Theme.of(context).colorScheme.background,
+        dropdownColor: Theme.of(context).colorScheme.surface,
       ),
       if (_concentrationType == 'Molarity (mol/L)')
         Padding(
@@ -161,7 +161,7 @@ class _ConcentrationCalculatorPageState extends ConsumerState<ConcentrationCalcu
         }).toList(),
         isExpanded: true,
         style: TextStyle(fontSize: 18, color: Theme.of(context).textTheme.bodyMedium?.color),
-        dropdownColor: Theme.of(context).colorScheme.background,
+        dropdownColor: Theme.of(context).colorScheme.surface,
       ),
     ];
   }
@@ -170,7 +170,7 @@ class _ConcentrationCalculatorPageState extends ConsumerState<ConcentrationCalcu
     _soluteController.clear();
     _volumeController.clear();
     _molarMassController.clear();
-    _densityController.clear(); // Reset density field
+    _densityController.clear();
     _volumeUnit = null;
     _concentrationUnit = null;
     _result = null;
@@ -208,12 +208,9 @@ class _ConcentrationCalculatorPageState extends ConsumerState<ConcentrationCalcu
     }
 
     if (_concentrationType == 'Molarity (mol/L)') {
-      double moles = solute;
-      if (_concentrationUnit == 'g/L' || _concentrationUnit == 'mg/mL') {
-        moles = solute / molarMass!;
-      }
       setState(() {
-        _result = moles / volumeInLiters;
+        _result = solute / volumeInLiters;
+        _concentrationUnit = 'mol/L';
       });
     } else if (_concentrationType == 'Mass Concentration (g/L)') {
       double grams = solute;
@@ -222,19 +219,22 @@ class _ConcentrationCalculatorPageState extends ConsumerState<ConcentrationCalcu
       }
       setState(() {
         _result = grams / volumeInLiters;
+        _concentrationUnit = 'g/L';
       });
     } else if (_concentrationType == 'Percentage Concentration') {
       if (density != null) {
         // Convert percentage to g/mL based on density
-        double soluteInGrams = solute / 100 * density * volumeInLiters * 1000;
+        double soluteInGrams = solute / 100 * density * volumeInLiters;
         setState(() {
           _result = soluteInGrams / volumeInLiters;
+          _concentrationUnit = 'g/mL';
         });
       } else {
         // Convert percentage to g/L without density
         double soluteInGrams = solute / 100 * volumeInLiters * 1000;
         setState(() {
           _result = soluteInGrams / volumeInLiters;
+          _concentrationUnit = 'g/L';
         });
       }
     }

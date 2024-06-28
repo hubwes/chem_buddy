@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
 import '../../data/models/question_model.dart';
-import '../../services/quiz_service.dart';
 
 class QuestionForm extends StatefulWidget {
   final Question? question;
-  final Function onSave;
+  final Function(Question) onSave;
 
   QuestionForm({this.question, required this.onSave});
 
@@ -19,7 +17,6 @@ class _QuestionFormState extends State<QuestionForm> {
   final _questionController = TextEditingController();
   final _optionsController = List.generate(4, (_) => TextEditingController());
   final _correctAnswerController = TextEditingController();
-  final _quizService = QuizService();
 
   @override
   void initState() {
@@ -58,7 +55,13 @@ class _QuestionFormState extends State<QuestionForm> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(widget.question != null ? 'Edit Question' : 'Add Question'),
+      title: Text(
+        widget.question != null ? 'Edit Question' : 'Add Question',
+        style: TextStyle(
+          color: Colors.deepOrange,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
       content: Form(
         key: _formKey,
         child: SingleChildScrollView(
@@ -66,20 +69,49 @@ class _QuestionFormState extends State<QuestionForm> {
             children: [
               TextFormField(
                 controller: _questionController,
-                decoration: InputDecoration(labelText: 'Question'),
-                validator: (value) => value!.isEmpty ? 'Please enter a question' : null,
+                decoration: InputDecoration(
+                  labelText: 'Question',
+                  labelStyle: TextStyle(color: Colors.deepOrange),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.deepOrange),
+                  ),
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) =>
+                value!.isEmpty ? 'Please enter a question' : null,
               ),
+              SizedBox(height: 10),
               ..._optionsController.asMap().entries.map((entry) {
-                return TextFormField(
-                  controller: entry.value,
-                  decoration: InputDecoration(labelText: 'Option ${entry.key + 1}'),
-                  validator: (value) => value!.isEmpty ? 'Please enter an option' : null,
+                return Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: TextFormField(
+                    controller: entry.value,
+                    decoration: InputDecoration(
+                      labelText: 'Option ${entry.key + 1}',
+                      labelStyle: TextStyle(color: Colors.deepOrange),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.deepOrange),
+                      ),
+                      border: OutlineInputBorder(),
+                    ),
+                    validator: (value) =>
+                    value!.isEmpty ? 'Please enter an option' : null,
+                  ),
                 );
               }).toList(),
+              SizedBox(height: 10),
               TextFormField(
                 controller: _correctAnswerController,
-                decoration: InputDecoration(labelText: 'Correct Answer'),
-                validator: (value) => value!.isEmpty ? 'Please enter the correct answer' : null,
+                decoration: InputDecoration(
+                  labelText: 'Correct Answer',
+                  labelStyle: TextStyle(color: Colors.deepOrange),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.deepOrange),
+                  ),
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) =>
+                value!.isEmpty ? 'Please enter the correct answer' : null,
               ),
             ],
           ),
@@ -88,11 +120,11 @@ class _QuestionFormState extends State<QuestionForm> {
       actions: [
         TextButton(
           onPressed: () => Navigator.of(context).pop(),
-          child: Text('Cancel'),
+          child: Text('Cancel', style: TextStyle(color:  Colors.deepOrange),)
         ),
         TextButton(
           onPressed: _saveQuestion,
-          child: Text('Save'),
+          child: Text('Save', style: TextStyle(color:  Colors.deepOrange),)
         ),
       ],
     );

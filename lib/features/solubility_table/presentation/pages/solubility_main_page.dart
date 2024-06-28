@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'solubility_table_page.dart';
-import 'ions_list_page.dart';
+import '../widgets/solubility_table_widget.dart';
+import '../widgets/ions_list_widget.dart';
 
 class SolubilityMainPage extends StatefulWidget {
   @override
@@ -11,8 +11,8 @@ class _SolubilityMainPageState extends State<SolubilityMainPage> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    SolubilityTablePage(),
-    IonsListPage(),
+    SolubilityTableWidget(),
+    IonsListWidget(),
   ];
 
   void _onItemTapped(int index) {

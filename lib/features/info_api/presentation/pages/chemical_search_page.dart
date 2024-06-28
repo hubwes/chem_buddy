@@ -3,9 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:chem_buddy/features/info_api/presentation/providers/chemical_api_provider.dart';
 import 'package:chem_buddy/features/info_api/presentation/providers/search_history_provider.dart';
 import 'package:chem_buddy/features/info_api/services/search_history_service.dart';
-import 'package:chem_buddy/features/info_api/data/models/search_history_model.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ChemicalSearchPage extends ConsumerStatefulWidget {
   final Function(String) onSearch;
@@ -36,6 +33,7 @@ class _ChemicalSearchPageState extends ConsumerState<ChemicalSearchPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Chemical Search'),
+        backgroundColor: Colors.deepOrange,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -45,8 +43,13 @@ class _ChemicalSearchPageState extends ConsumerState<ChemicalSearchPage> {
               controller: _controller,
               decoration: InputDecoration(
                 labelText: 'Enter compound name',
+                labelStyle: TextStyle(color: Colors.deepOrange),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.deepOrange),
+                ),
+                border: OutlineInputBorder(),
                 suffixIcon: IconButton(
-                  icon: Icon(Icons.search),
+                  icon: Icon(Icons.search, color: Colors.deepOrange),
                   onPressed: () async {
                     widget.onSearch(_controller.text);
                     final searchHistoryService = ref.read(searchHistoryServiceProvider);

@@ -50,9 +50,13 @@ class _QuizPageState extends ConsumerState<QuizPage> {
       return Scaffold(
         appBar: AppBar(
           title: Text('Quiz Result'),
+          backgroundColor: Colors.deepOrange,
         ),
         body: Center(
-          child: Text('Your score: $_score/${_questions.length}'),
+          child: Text(
+            'Your score: $_score/${_questions.length}',
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.blueGrey),
+          ),
         ),
       );
     }
@@ -61,6 +65,7 @@ class _QuizPageState extends ConsumerState<QuizPage> {
       return Scaffold(
         appBar: AppBar(
           title: Text('Quiz'),
+          backgroundColor: Colors.deepOrange,
         ),
         body: Center(
           child: CircularProgressIndicator(),
@@ -73,6 +78,7 @@ class _QuizPageState extends ConsumerState<QuizPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Quiz'),
+        backgroundColor: Colors.deepOrange,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -81,18 +87,24 @@ class _QuizPageState extends ConsumerState<QuizPage> {
           children: [
             Text(
               'Question ${_currentQuestionIndex + 1}/${_questions.length}',
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 20, color: Colors.blueGrey),
             ),
             SizedBox(height: 16),
             Text(
               question.question,
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black87),
             ),
             SizedBox(height: 16),
             ...question.options.map((option) {
-              return ElevatedButton(
-                onPressed: () => _submitAnswer(option),
-                child: Text(option),
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: EdgeInsets.symmetric(vertical: 16.0),
+                  ),
+                  onPressed: () => _submitAnswer(option),
+                  child: Text(option, style: TextStyle(fontSize: 18)),
+                ),
               );
             }).toList(),
           ],

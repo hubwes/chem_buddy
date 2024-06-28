@@ -12,11 +12,38 @@ class FlashcardWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onFlip,
       child: Card(
-        child: Center(
-          child: Text(
-            flashcard.question,
-            style: TextStyle(fontSize: 24),
-            textAlign: TextAlign.center,
+        elevation: 4,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.orange.shade200, Colors.deepOrange.shade400],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Center(
+            child: Text(
+              flashcard.question,
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+                shadows: [
+                  Shadow(
+                    blurRadius: 5.0,
+                    color: Colors.black45,
+                    offset: Offset(2.0, 2.0),
+                  ),
+                ],
+              ),
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
       ),

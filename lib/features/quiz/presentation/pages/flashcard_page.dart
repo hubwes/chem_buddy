@@ -57,6 +57,7 @@ class _FlashcardPageState extends ConsumerState<FlashcardPage> {
       return Scaffold(
         appBar: AppBar(
           title: Text('Flashcards'),
+          backgroundColor: Colors.deepOrange,
         ),
         body: Center(
           child: CircularProgressIndicator(),
@@ -69,48 +70,63 @@ class _FlashcardPageState extends ConsumerState<FlashcardPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Flashcards'),
+        backgroundColor: Colors.deepOrange,
       ),
       body: GestureDetector(
         onTap: _flipFlashcard,
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                _showAnswer ? "Odpowiedź:" : "Pytanie:",
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blueGrey,
-                ),
-                textAlign: TextAlign.center,
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
               ),
-              SizedBox(height: 20),
-              Text(
-                _showAnswer ? flashcard.correctAnswer : flashcard.question,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black87,
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      _showAnswer ? "Odpowiedź:" : "Pytanie:",
+                      style: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blueGrey,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 20),
+                    Text(
+                      _showAnswer ? flashcard.correctAnswer : flashcard.question,
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black87,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
                 ),
-                textAlign: TextAlign.center,
               ),
-            ],
-          ),
+            ),
           ),
         ),
+      ),
       bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               IconButton(
-                icon: Icon(Icons.arrow_back),
+                icon: Icon(Icons.arrow_back, color: Colors.deepOrange),
                 onPressed: _previousFlashcard,
               ),
               IconButton(
-                icon: Icon(Icons.arrow_forward),
+                icon: Icon(Icons.arrow_forward, color: Colors.deepOrange),
                 onPressed: _nextFlashcard,
               ),
             ],

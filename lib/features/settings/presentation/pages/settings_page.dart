@@ -23,55 +23,64 @@ class SettingsPage extends ConsumerWidget {
       DropdownMenuItem(value: 'Dark', child: Text('Dark')),
     ];
 
-    print('Current language setting: ${settings.language}');
-    print('Available languages: ${languages.map((e) => e.value).toList()}');
-
     return Scaffold(
       appBar: AppBar(
         title: Text(localizations.translate('settings')),
+        backgroundColor: Colors.deepOrange,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: [
-            ListTile(
-              title: Text(localizations.translate('language')),
-              trailing: DropdownButton<String>(
-                value: settings.language,
-                onChanged: (value) {
-                  if (value != null) {
-                    print('Language selected: $value');
-                    ref.read(settingsProvider.notifier).updateLanguage(value);
-                  }
-                },
-                items: languages,
+        child: Card(
+          elevation: 4,
+          margin: EdgeInsets.symmetric(vertical: 8.0),
+          child: ListView(
+            children: [
+              ListTile(
+                title: Text(
+                  localizations.translate('language'),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                ),
+                trailing: DropdownButton<String>(
+                  value: settings.language,
+                  onChanged: (value) {
+                    if (value != null) {
+                      ref.read(settingsProvider.notifier).updateLanguage(value);
+                    }
+                  },
+                  items: languages,
+                ),
               ),
-            ),
-            ListTile(
-              title: Text(localizations.translate('theme')),
-              trailing: DropdownButton<String>(
-                value: settings.theme,
-                onChanged: (value) {
-                  if (value != null) {
-                    ref.read(settingsProvider.notifier).updateTheme(value);
-                  }
-                },
-                items: themes,
+              Divider(),
+              ListTile(
+                title: Text(
+                  localizations.translate('theme'),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                ),
+                trailing: DropdownButton<String>(
+                  value: settings.theme,
+                  onChanged: (value) {
+                    if (value != null) {
+                      ref.read(settingsProvider.notifier).updateTheme(value);
+                    }
+                  },
+                  items: themes,
+                ),
               ),
-            ),
-
-            ElevatedButton(
-              onPressed: () {
-                custom_date_picker.DatePicker.showDateTimePicker(context, showTitleActions: true, onConfirm: (date) {
-                  NotificationService.scheduleNotification(
-                    title: localizations.translate('reminder_title'),
-                    body: localizations.translate('reminder_body')
-                  );
-                }, currentTime: DateTime.now(), locale: custom_date_picker.LocaleType.en);
-              },
-              child: Text(localizations.translate('set_reminder')),
-            ),
-          ],
+              Divider(),
+              ElevatedButton(
+                onPressed: () {
+                  custom_date_picker.DatePicker.showDateTimePicker(context, showTitleActions: true, onConfirm: (date) {
+                    NotificationService.scheduleNotification(
+                        title: localizations.translate('reminder_title'),
+                        body: localizations.translate('reminder_body')
+                    );
+                  },
+                  currentTime: DateTime.now(), locale: custom_date_picker.LocaleType.en);
+                },
+                child: Text(localizations.translate('set_reminder')),
+              ),
+            ],
+          ),
         ),
       ),
     );

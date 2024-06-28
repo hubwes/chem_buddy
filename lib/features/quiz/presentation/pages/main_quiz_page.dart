@@ -42,6 +42,10 @@ class _MainQuizPageState extends State<MainQuizPage> {
             label: 'Flashcards',
           ),
         ],
+        selectedItemColor: Colors.deepOrange,
+        unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.white,
+        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }

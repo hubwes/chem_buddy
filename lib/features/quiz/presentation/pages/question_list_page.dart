@@ -12,6 +12,7 @@ class QuestionListPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Questions'),
+        backgroundColor: Colors.deepOrange,
       ),
       body: StreamBuilder<List<Question>>(
         stream: _quizService.getQuestions(),
@@ -32,35 +33,45 @@ class QuestionListPage extends ConsumerWidget {
             itemCount: questions.length,
             itemBuilder: (context, index) {
               final question = questions[index];
-              return ListTile(
-                title: Text(question.question),
-                subtitle: Text('Options: ${question.options.join(', ')}'),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.edit),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return QuestionForm(
-                              question: question,
-                              onSave: (updatedQuestion) {
-                                _quizService.updateQuestion(updatedQuestion);
-                              },
-                            );
-                          },
-                        );
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.delete),
-                      onPressed: () {
-                        _quizService.deleteQuestion(question.id);
-                      },
-                    ),
-                  ],
+              return Card(
+                elevation: 4,
+                margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
+                child: ListTile(
+                  title: Text(
+                    question.question,
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  subtitle: Text(
+                    'Options: ${question.options.join(', ')}',
+                    style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.edit, color: Colors.deepOrange),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return QuestionForm(
+                                question: question,
+                                onSave: (updatedQuestion) {
+                                  _quizService.updateQuestion(updatedQuestion);
+                                },
+                              );
+                            },
+                          );
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.delete, color: Colors.red),
+                        onPressed: () {
+                          _quizService.deleteQuestion(question.id);
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               );
             },
@@ -81,6 +92,7 @@ class QuestionListPage extends ConsumerWidget {
           );
         },
         child: Icon(Icons.add),
+        backgroundColor: Colors.deepOrange,
       ),
     );
   }

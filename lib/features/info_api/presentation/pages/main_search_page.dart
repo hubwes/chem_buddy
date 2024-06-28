@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'chemical_search_page.dart';
 import 'search_history_page.dart';
 
-
 class MainSearchPage extends ConsumerStatefulWidget {
   @override
   _MainSearchPageState createState() => _MainSearchPageState();
@@ -60,7 +59,12 @@ class _MainSearchPageState extends ConsumerState<MainSearchPage> {
           ),
         ],
         currentIndex: _selectedIndex,
+        selectedItemColor: Colors.deepOrange,
+        unselectedItemColor: Colors.grey,
         onTap: _onItemTapped,
+        backgroundColor: Colors.white,
+        type: BottomNavigationBarType.fixed,
+        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }
